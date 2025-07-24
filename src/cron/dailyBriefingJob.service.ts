@@ -11,17 +11,7 @@ async function generateDailyBreifing() {
     console.log("[ℹ️ generateDailBriefing] gathering date information...");
     const today = new Date();
 
-    let fromDate;
-    let trimDays;
-    if (today.getDay() == 1) {
-        // get from midnight three days ago
-        fromDate = new Date(Date.now()-MILLISECONDS_PER_DAY*3);
-        trimDays = 4;
-    } else {
-        fromDate = new Date(Date.now()-MILLISECONDS_PER_DAY*3);
-        trimDays = 2;
-    }
-
+    const fromDate = new Date(Date.now()-MILLISECONDS_PER_DAY);
     fromDate.setHours(0, 0, 0, 0);
 
     const toDateString = today.toISOString();
@@ -43,7 +33,10 @@ async function generateDailyBreifing() {
 
     console.log("[ℹ️ generateDailBriefing] updating database...");
 
-    await dbService.pruneBriefs(trimDays);
+    // initially i wasn't sure if it would be better to save old briefs for
+    // a day or two, although now I think it might be better just to clear
+    // everything
+    await dbService.pruneBriefs(0);
     await dbService.publishDailyBriefs(breifs);
 
     console.log("[ℹ️ generateDailBriefing] daily briefs generated.");
