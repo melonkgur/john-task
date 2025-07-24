@@ -15,7 +15,7 @@ interface EnrichedArticle extends AnalyzedArticle {
 }
 
 interface DailyBrief {
-    uuid: string,
+    id: string,
     symbol: string,
     companyName: string,
     icon?: string|undefined,

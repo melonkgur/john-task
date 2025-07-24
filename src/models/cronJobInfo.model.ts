@@ -5,4 +5,4 @@ interface CronJobInfo {
     method: () => Promise<void>
 }
 
-export {CronJobInfo}
+export { CronJobInfo };

@@ -48,15 +48,16 @@ namespace fmp_service {
      * @returns An array containing all holdings for the desired fund.
      */
     export async function getETFHoldings(etfSymbol: string): Promise<ETFHoldings[]> {
+        let response;
         try {
-            const response = await axios.get(
+            response = await axios.get(
                 `https://financialmodelingprep.com/stable/etf/holdings?symbol=${etfSymbol}&apikey=${config.FMP_KEY}`
             );
 
-            if (response.data && !response.data.length)
+            if (response.data && response.data.length)
                 return response.data as ETFHoldings[];
             else {
-                console.error(`⚠️ getETFHoldings recieved empty array or null for symbol "${etfSymbol}".`);
+                console.error(`⚠️ getETFHoldings recieved an invalid response for symbol "${etfSymbol}" (${response.status}):`, response.data);
                 return [];
             }
         } catch(err) {
@@ -75,10 +76,10 @@ namespace fmp_service {
                `https://financialmodelingprep.com/api/v3/stock_news?tickers=${symbol}&page=1&from=${fromDate}&to=${toDate}&apikey=${config.FMP_KEY}`
             );
 
-            if (response.data && !response.data.length)
+            if (response.data && response.data.length)
                 return response.data as Article[];
             else {
-                console.error(`⚠️ getStockNews recieved empty array or null for symbol "${symbol}" between dates "${fromDate}" to "${toDate}.`);
+                console.error(`⚠️ getStockNews recieved empty array or null for symbol "${symbol}" between dates "${fromDate}" to "${toDate}".`);
                 return [];
             }
         } catch(err) {

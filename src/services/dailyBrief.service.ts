@@ -19,7 +19,7 @@ namespace daily_brief_service {
     export function finalizeArticles(enriched: EnrichedArticle[]): DailyBrief[] {
         return enriched.map((article, i) => {
             return {
-                uuid: randomUUID(),
+                id: randomUUID(),
                 symbol: article.symbol,
                 companyName: article.companyProfile.companyName ?? article.symbol,
                 icon: article.companyProfile.image,

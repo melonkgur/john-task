@@ -18,5 +18,5 @@ app.use("/daily-brief", dailyBrief);
 
 app.listen(port, () => {
     console.log(`Server started on port: ${port}`);
-    dailyBreifingJob.method();
+    // dailyBreifingJob.method();
 })
