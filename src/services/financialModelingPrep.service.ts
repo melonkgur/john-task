@@ -66,7 +66,7 @@ namespace fmp_service {
         }
     }
 
-    async function getStockNews(
+    export async function getStockNews(
         symbol: string,
         fromDate: string,
         toDate: string
@@ -95,7 +95,7 @@ namespace fmp_service {
      *
      * @returns A list of *n* (analyzed) articles or less.
      */
-    async function analyzeArticles(
+    export async function analyzeArticles(
         articles: Article[]
     ): Promise<AnalyzedArticle[]> {
         if (articles.length === 0) {

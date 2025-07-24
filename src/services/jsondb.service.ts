@@ -35,7 +35,7 @@ class JsonDBService {
 
             const year = Number.parseInt(dateStrComponents[0]);
             const month = Number.parseInt(dateStrComponents[1]);
-            const day = Number.parseInt(dateStrComponents[2]);
+            const day = Number.parseInt(dateStrComponents[2].substring(0, dateStrComponents[2].indexOf(" ")));
 
             if (isNaN(year) || isNaN(month) || isNaN(day)) {
                 console.error(
